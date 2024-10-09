@@ -167,4 +167,43 @@
                     `Your donation of $${amount} will help approximately ${childrenHelped} month(s) of education for a child. 
                     <br> Breakdown: 
                     <br> - $${fundraising.toFixed(2)} for Fundraising 
-                    <br> - $${management.toFixed(
+                    <br> - $${management.toFixed(2)} for Management 
+                    <br> - $${programs.toFixed(2)} for Programs.`;
+
+                const ctx = document.getElementById('pieChart').getContext('2d');
+
+                // Destroy the existing chart instance if it exists to prevent overlapping charts
+                if (pieChartInstance) {
+                    pieChartInstance.destroy();
+                }
+
+                // Create a new chart with shadow to simulate 3D effect
+                pieChartInstance = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Fundraising (8%)', 'Management (3%)', 'Programs (89%)'],
+                        datasets: [{
+                            data: [fundraising, management, programs],
+                            backgroundColor: ['#DE5428', '#E89619', '#323C8F'],
+                            borderWidth: 1,
+                            borderColor: '#ffffff', // White border for more contrast
+                            hoverOffset: 10 // Adds depth effect on hover
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,  // Ensures chart fits the container
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            } else {
+                document.getElementById('impactResult').innerHTML = 'Please enter a valid amount.';
+            }
+        }
+    </script>
+</body>
+</html>
