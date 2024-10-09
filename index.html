@@ -10,11 +10,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            max-width: 100%; /* Ensure content stays within width */
+            max-width: 100%;
         }
         .container {
             width: 100%;
-            max-width: 100%; /* Make sure the container does not overflow */
+            max-width: 100%;
             padding: 15px;
             margin: 0 auto;
             box-sizing: border-box;
@@ -23,8 +23,8 @@
             width: 90%; /* Input box and button width set to 90% */
             max-width: 90%;
             margin: 10px 0;
-            padding: 10px; /* Add padding for more visibility */
-            font-size: 16px; /* Make the font a bit larger */
+            padding: 10px;
+            font-size: 16px;
             border: 2px solid #E89619;
             border-radius: 5px;
         }
@@ -47,9 +47,11 @@
             color: #282D27;
         }
         canvas {
-            width: 100% !important; /* Ensure chart scales with the container */
+            width: 240px !important; /* Medium-sized pie chart */
+            height: 240px !important;
             max-width: 100% !important;
-            height: 200px; /* Ensure the chart is not too tall */
+            margin: 0 auto; /* Center the pie chart */
+            display: block;
         }
         .preset-buttons {
             margin-bottom: 15px;
@@ -77,10 +79,11 @@
                 max-width: 90%;
             }
             input, button {
-                width: 100%; /* Full width for smaller devices */
+                width: 100%;
             }
             canvas {
-                height: 180px;
+                height: 220px; /* Adjusted for tablets */
+                width: 220px;
             }
         }
 
@@ -96,7 +99,8 @@
                 width: 100%;
             }
             canvas {
-                height: 150px;
+                height: 200px; /* Medium size for mobile */
+                width: 200px;
             }
         }
     </style>
@@ -123,7 +127,7 @@
         <h3>Results:</h3>
         <p id="impactResult"></p>
 
-        <!-- Pie chart container -->
+        <!-- Medium-sized pie chart container -->
         <canvas id="pieChart"></canvas>
 
         <div class="explanation">
@@ -141,7 +145,7 @@
         // Pre-set donation amount button function
         function setDonation(amount) {
             document.getElementById('donationAmount').value = amount;
-            calculateImpact();  // Auto-calculate the impact after clicking the button
+            calculateImpact();
         }
 
         // Calculate impact based on input value
@@ -153,9 +157,8 @@
                 const management = amount * 0.03;
                 const programs = amount * 0.89;
 
-                const childrenHelped = (programs / 100) * 2; // Every $100 helps a child for 2 months
+                const childrenHelped = (programs / 100) * 2;
 
-                // Improved explanation based on donation amount
                 if (amount >= 175) {
                     document.getElementById('impactResult').innerHTML = 
                         `Your donation of $${amount} will help at least 1 child for 1 month. Every donation makes a real impact!`;
@@ -166,12 +169,10 @@
 
                 const ctx = document.getElementById('pieChart').getContext('2d');
 
-                // Destroy the existing chart instance if it exists to prevent overlapping charts
                 if (pieChartInstance) {
                     pieChartInstance.destroy();
                 }
 
-                // Create a new pie chart
                 pieChartInstance = new Chart(ctx, {
                     type: 'pie',
                     data: {
