@@ -64,8 +64,9 @@
             text-align: center;
         }
         .preset-buttons button {
-            width: 28%;
+            width: 30%; /* Ensure buttons fit side by side */
             margin: 5px;
+            display: inline-block; /* Align buttons horizontally */
         }
         .explanation {
             margin-top: 20px;
@@ -92,6 +93,10 @@
                 height: 220px;
                 width: 220px;
             }
+            .preset-buttons button {
+                width: 45%; /* Adjust button width for tablets */
+                margin: 5px auto;
+            }
         }
 
         /* Responsive Design for Mobile */
@@ -108,6 +113,10 @@
             canvas {
                 height: 200px;
                 width: 200px;
+            }
+            .preset-buttons button {
+                width: 100%; /* Full width for buttons on mobile */
+                margin: 5px 0;
             }
         }
     </style>
