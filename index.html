@@ -55,7 +55,7 @@
         }
         #impactResult {
             margin-top: 20px;
-            font-size: 16px;
+            font-size: 14px; /* Made smaller */
             font-weight: bold;
             color: #282D27;
         }
@@ -95,7 +95,7 @@
                 width: 100%;
             }
             #impactResult {
-                font-size: 15px;
+                font-size: 13px;
             }
         }
 
@@ -112,7 +112,7 @@
                 width: 100%;
             }
             #impactResult {
-                font-size: 14px;
+                font-size: 12px;
             }
         }
     </style>
@@ -165,13 +165,14 @@
 
                 const childrenHelped = (programs / 100) * 2; // Every $100 helps a child for 2 months
 
-                // Improved message for collective impact
-                document.getElementById('impactResult').innerHTML = 
-                    `Your donation of $${amount} contributes to a collective effort towards helping a child's education. 
-                    <br> Breakdown: 
-                    <br> - $${fundraising.toFixed(2)} for Fundraising 
-                    <br> - $${management.toFixed(2)} for Management 
-                    <br> - $${programs.toFixed(2)} for Programs.`;
+                // Improved explanation based on donation amount
+                if (amount >= 175) {
+                    document.getElementById('impactResult').innerHTML = 
+                        `Your donation of $${amount} will help at least 1 child for 1 month. Every donation makes a real impact!`;
+                } else {
+                    document.getElementById('impactResult').innerHTML = 
+                        `Your donation of $${amount} contributes to a collective effort to help a child's education. Every bit counts!`;
+                }
 
                 const ctx = document.getElementById('pieChart').getContext('2d');
 
@@ -180,7 +181,7 @@
                     pieChartInstance.destroy();
                 }
 
-                // Simulating 3D effect with shadow and hoverOffset
+                // Create a new chart with a 3D-like effect
                 pieChartInstance = new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -190,9 +191,12 @@
                             backgroundColor: ['#DE5428', '#E89619', '#323C8F'],
                             borderWidth: 1,
                             borderColor: '#ffffff', // White border for more contrast
-                            hoverOffset: 20, // Larger hover offset for 3D look
+                            hoverOffset: 20, // Larger hover offset for 3D effect
                             borderAlign: 'inner', // Aligns the border for depth
-                            hoverBackgroundColor: ['#D74E28', '#E89119', '#2E3C7F'] // Slightly darker hover colors
+                            hoverBackgroundColor: ['#D74E28', '#E89119', '#2E3C7F'], // Darker hover colors for depth
+                            shadowBlur: 10, // Shadow effect for depth
+                            shadowOffsetX: 3,
+                            shadowOffsetY: 3
                         }]
                     },
                     options: {
