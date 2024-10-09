@@ -29,19 +29,21 @@
         }
         input {
             margin: 10px;
-            padding: 10px;
-            width: 90%;
+            padding: 12px; /* Larger padding for better visibility */
+            width: 80%; /* Reduce width to make it smaller */
             border: 2px solid #E89619;
             border-radius: 5px;
+            font-weight: bold; /* Make the text bold */
+            font-size: 18px; /* Larger font for better visibility */
         }
         button {
             background-color: #DE5428;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 15px; /* Reduced width */
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 90%;
+            width: 50%; /* Make the button smaller */
         }
         button:hover {
             background-color: #E89619;
@@ -55,15 +57,15 @@
         }
         #impactResult {
             margin-top: 20px;
-            font-size: 14px; /* Made smaller */
+            font-size: 14px;
             font-weight: bold;
             color: #282D27;
         }
         canvas {
             margin-top: 20px;
             max-width: 100%;
-            height: 300px;
-            width: 300px;
+            height: 250px; /* Reduce chart height */
+            width: 250px;  /* Reduce chart width */
         }
         .explanation {
             margin-top: 30px;
@@ -92,7 +94,7 @@
                 font-size: 22px;
             }
             input, button {
-                width: 100%;
+                width: 100%; /* Full width for mobile and tablet */
             }
             #impactResult {
                 font-size: 13px;
@@ -109,7 +111,7 @@
                 font-size: 20px;
             }
             input, button {
-                width: 100%;
+                width: 100%; /* Full width for mobile */
             }
             #impactResult {
                 font-size: 12px;
@@ -135,7 +137,7 @@
         <h3>Results:</h3>
         <p id="impactResult"></p>
 
-        <!-- Fixed height and width for canvas -->
+        <!-- Reduced height and width for canvas -->
         <canvas id="pieChart"></canvas>
 
         <div class="explanation">
@@ -181,7 +183,7 @@
                     pieChartInstance.destroy();
                 }
 
-                // Create a new chart with a 3D-like effect
+                // Create a new chart with 3D-like effect (shadow, hover)
                 pieChartInstance = new Chart(ctx, {
                     type: 'pie',
                     data: {
@@ -194,9 +196,9 @@
                             hoverOffset: 20, // Larger hover offset for 3D effect
                             borderAlign: 'inner', // Aligns the border for depth
                             hoverBackgroundColor: ['#D74E28', '#E89119', '#2E3C7F'], // Darker hover colors for depth
-                            shadowBlur: 10, // Shadow effect for depth
-                            shadowOffsetX: 3,
-                            shadowOffsetY: 3
+                            shadowBlur: 15, // Shadow effect for depth
+                            shadowOffsetX: 5,
+                            shadowOffsetY: 5
                         }]
                     },
                     options: {
