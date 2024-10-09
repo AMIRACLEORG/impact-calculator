@@ -15,7 +15,7 @@
         }
         .container {
             width: 100%;
-            max-width: 400px;
+            max-width: 400px; /* Adjusted width */
             margin: 0 auto;
             text-align: center;
             background-color: white;
@@ -46,6 +46,13 @@
         button:hover {
             background-color: #E89619;
         }
+        .preset-buttons {
+            margin-bottom: 20px;
+        }
+        .preset-buttons button {
+            width: 30%;
+            margin: 5px;
+        }
         #impactResult {
             margin-top: 20px;
             font-size: 16px;
@@ -54,8 +61,8 @@
         }
         canvas {
             margin-top: 20px;
-            max-width: 100%;
-            height: auto;
+            max-width: 100%; /* Ensure chart fits */
+            height: 250px; /* Fixed height to make it smaller */
         }
         .explanation {
             margin-top: 30px;
@@ -112,14 +119,22 @@
 <body>
     <div class="container">
         <h2>Impact Calculator</h2>
-        <p>Enter the amount you want to donate to see how it helps children and communities.</p>
-        <input type="number" id="donationAmount" placeholder="Enter amount in $" />
+        <p>Choose a pre-set donation amount or enter a custom amount to see its impact:</p>
+
+        <!-- Pre-set buttons -->
+        <div class="preset-buttons">
+            <button onclick="setDonation(25)">Donate $25</button>
+            <button onclick="setDonation(50)">Donate $50</button>
+            <button onclick="setDonation(100)">Donate $100</button>
+        </div>
+
+        <input type="number" id="donationAmount" placeholder="Enter custom amount in $" />
         <button onclick="calculateImpact()">Calculate Impact</button>
 
         <h3>Results:</h3>
         <p id="impactResult"></p>
 
-        <canvas id="pieChart" width="300" height="300"></canvas>
+        <canvas id="pieChart" width="300" height="250"></canvas> <!-- Reduced height -->
 
         <div class="explanation">
             <h4>How Your Donation is Used:</h4>
@@ -130,7 +145,13 @@
     </div>
 
     <script>
-        let pieChartInstance = null;  // Declaring a global variable for the chart
+        let pieChartInstance = null;
+
+        // Pre-set donation amount button function
+        function setDonation(amount) {
+            document.getElementById('donationAmount').value = amount;
+            calculateImpact();  // Auto-calculate the impact after clicking the button
+        }
 
         function calculateImpact() {
             const amount = document.getElementById('donationAmount').value;
@@ -140,46 +161,10 @@
                 const management = amount * 0.03;
                 const programs = amount * 0.89;
 
-                const childrenHelped = Math.floor(programs / 100);
+                const childrenHelped = Math.floor(programs / 100) * 2; // Every $100 helps a child for 2 months
 
                 document.getElementById('impactResult').innerHTML = 
-                    `Your donation of $${amount} will help approximately ${childrenHelped} child(ren). 
+                    `Your donation of $${amount} will help approximately ${childrenHelped} month(s) of education for a child. 
                     <br> Breakdown: 
                     <br> - $${fundraising.toFixed(2)} for Fundraising 
-                    <br> - $${management.toFixed(2)} for Management 
-                    <br> - $${programs.toFixed(2)} for Programs.`;
-
-                const ctx = document.getElementById('pieChart').getContext('2d');
-
-                // Destroy the existing chart instance if it exists to prevent overlapping charts
-                if (pieChartInstance) {
-                    pieChartInstance.destroy();
-                }
-
-                // Create a new chart
-                pieChartInstance = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Fundraising (8%)', 'Management (3%)', 'Programs (89%)'],
-                        datasets: [{
-                            data: [fundraising, management, programs],
-                            backgroundColor: ['#DE5428', '#E89619', '#323C8F']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: true, // Ensure chart fits well across all platforms
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }
-                });
-            } else {
-                document.getElementById('impactResult').innerHTML = 'Please enter a valid amount.';
-            }
-        }
-    </script>
-</body>
-</html>
+                    <br> - $${management.toFixed(
