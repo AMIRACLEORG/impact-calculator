@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        input {
+            margin: 10px;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Impact Calculator</h2>
+        <p>Enter the amount you want to donate:</p>
+        <input type="number" id="donationAmount" placeholder="Enter amount in $" />
+        <button onclick="calculateImpact()">Calculate Impact</button>
+
+        <h3>Results:</h3>
+        <p id="impactResult"></p>
+
+        <canvas id="pieChart" width="300" height="300"></canvas>
+    </div>
+
+    <script>
+        function calculateImpact() {
+            const amount = document.getElementById('donationAmount').value;
+
+            if (amount && amount > 0) {
+                const fundraising = amount * 0.08;
+                const management = amount * 0.03;
+                const programs = amount * 0.89;
+
+                const childrenHelped = Math.floor(programs / 100);
+
+                document.getElementById('impactResult').innerHTML = 
+                    `Your donation of $${amount} will help approximately ${childrenHelped} child(ren). 
+                    <br> Breakdown: 
+                    <br> - $${fundraising.toFixed(2)} for Fundraising 
+                    <br> - $${management.toFixed(2)} for Management 
+                    <br> - $${programs.toFixed(2)} for Programs.`;
+
+                const ctx = document.getElementById('pieChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Fundraising (8%)', 'Management (3%)', 'Programs (89%)'],
+                        datasets: [{
+                            data: [fundraising, management, programs],
+                            backgroundColor: ['#DE5428', '#E89619', '#323C8F']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            } else {
+                document.getElementById('impactResult').innerHTML = 'Please enter a valid amount.';
+            }
+        }
+    </script>
+</body>
+</html>
