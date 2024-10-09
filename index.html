@@ -15,21 +15,22 @@
         }
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 400px; /* Max width for desktop */
             margin: 0 auto;
             text-align: center;
             background-color: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         h2 {
             color: #323C8F;
+            font-size: 24px;
         }
         input {
             margin: 10px;
             padding: 10px;
-            width: 80%;
+            width: 90%; /* Adjusted to fit better */
             border: 2px solid #E89619;
             border-radius: 5px;
         }
@@ -40,18 +41,21 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 90%; /* Adjusted for better fit */
         }
         button:hover {
             background-color: #E89619;
         }
         #impactResult {
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 16px; /* Adjusted for readability */
             font-weight: bold;
             color: #282D27;
         }
         canvas {
-            margin-top: 30px;
+            margin-top: 20px;
+            max-width: 100%; /* Scales the pie chart to fit */
+            height: auto; /* Adjusts the height to maintain aspect ratio */
         }
         .explanation {
             margin-top: 30px;
@@ -68,6 +72,40 @@
             color: #282D27;
             font-size: 14px;
             line-height: 1.6;
+        }
+
+        /* Responsive Design for Tablets */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%; /* Shrinks the container to fit tablets */
+                padding: 15px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            input, button {
+                width: 100%; /* Ensure input and buttons fit on smaller screens */
+            }
+            #impactResult {
+                font-size: 15px;
+            }
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%; /* Full width for mobile */
+                padding: 10px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            input, button {
+                width: 100%; /* Full width input and buttons */
+            }
+            #impactResult {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -121,6 +159,7 @@
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,  /* Ensures the chart scales properly */
                         plugins: {
                             legend: {
                                 position: 'bottom'
