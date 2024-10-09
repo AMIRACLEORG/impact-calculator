@@ -15,7 +15,7 @@
         }
         .container {
             width: 100%;
-            max-width: 400px; /* Adjusted width */
+            max-width: 400px;
             margin: 0 auto;
             text-align: center;
             background-color: white;
@@ -61,8 +61,8 @@
         }
         canvas {
             margin-top: 20px;
-            max-width: 100%; /* Ensure chart fits */
-            height: 250px; /* Fixed height to make it smaller */
+            max-width: 100%;
+            height: 250px;
         }
         .explanation {
             margin-top: 30px;
@@ -177,7 +177,7 @@
                     pieChartInstance.destroy();
                 }
 
-                // Create a new chart with shadow to simulate 3D effect
+                // Create a new chart
                 pieChartInstance = new Chart(ctx, {
                     type: 'pie',
                     data: {
