@@ -134,7 +134,7 @@
         <h3>Results:</h3>
         <p id="impactResult"></p>
 
-        <canvas id="pieChart" width="300" height="250"></canvas> <!-- Reduced height -->
+        <canvas id="pieChart" width="300" height="250"></canvas>
 
         <div class="explanation">
             <h4>How Your Donation is Used:</h4>
@@ -177,29 +177,33 @@
                     pieChartInstance.destroy();
                 }
 
-                // Create a new chart
-                pieChartInstance = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Fundraising (8%)', 'Management (3%)', 'Programs (89%)'],
-                        datasets: [{
-                            data: [fundraising, management, programs],
-                            backgroundColor: ['#DE5428', '#E89619', '#323C8F'],
-                            borderWidth: 1,
-                            borderColor: '#ffffff', // White border for more contrast
-                            hoverOffset: 10 // Adds depth effect on hover
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,  // Ensures chart fits the container
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
+                try {
+                    // Create a new chart
+                    pieChartInstance = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Fundraising (8%)', 'Management (3%)', 'Programs (89%)'],
+                            datasets: [{
+                                data: [fundraising, management, programs],
+                                backgroundColor: ['#DE5428', '#E89619', '#323C8F'],
+                                borderWidth: 1,
+                                borderColor: '#ffffff', // White border for more contrast
+                                hoverOffset: 10 // Adds depth effect on hover
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,  // Ensures chart fits the container
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                } catch (error) {
+                    console.error("Error rendering chart:", error);
+                }
             } else {
                 document.getElementById('impactResult').innerHTML = 'Please enter a valid amount.';
             }
