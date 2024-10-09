@@ -14,15 +14,15 @@
         }
         .container {
             width: 100%;
-            max-width: 100%;
+            max-width: 450px; /* Max width of the entire container to avoid stretching */
             padding: 15px;
             margin: 0 auto;
             box-sizing: border-box;
         }
         input, button {
-            width: 90%; /* Input box and button width set to 90% */
+            width: 90%; /* Set width of inputs and buttons to 90% to match the container */
             max-width: 90%;
-            margin: 10px 0;
+            margin: 10px auto;
             padding: 10px;
             font-size: 16px;
             border: 2px solid #E89619;
@@ -39,25 +39,28 @@
         h2 {
             font-size: 22px;
             color: #323C8F;
+            text-align: center; /* Center align the heading */
         }
         #impactResult {
             margin-top: 15px;
             font-size: 13px;
             font-weight: bold;
             color: #282D27;
+            text-align: center; /* Center align the result text */
         }
         canvas {
             width: 240px !important; /* Medium-sized pie chart */
             height: 240px !important;
             max-width: 100% !important;
-            margin: 0 auto; /* Center the pie chart */
+            margin: 20px auto; /* Center the pie chart */
             display: block;
         }
         .preset-buttons {
             margin-bottom: 15px;
+            text-align: center; /* Center align the preset buttons */
         }
         .preset-buttons button {
-            width: 28%; /* Smaller button size */
+            width: 28%;
             margin: 5px;
         }
         .explanation {
@@ -65,9 +68,9 @@
             background-color: #f9f9f9;
             padding: 15px;
             border-radius: 8px;
-            text-align: left;
             font-size: 13px;
             color: #282D27;
+            text-align: center; /* Center align the explanation text */
         }
         .explanation h4 {
             color: #DE5428;
@@ -82,7 +85,7 @@
                 width: 100%;
             }
             canvas {
-                height: 220px; /* Adjusted for tablets */
+                height: 220px;
                 width: 220px;
             }
         }
@@ -99,7 +102,7 @@
                 width: 100%;
             }
             canvas {
-                height: 200px; /* Medium size for mobile */
+                height: 200px;
                 width: 200px;
             }
         }
