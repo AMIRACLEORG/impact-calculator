@@ -11,16 +11,19 @@
             padding: 0;
             box-sizing: border-box;
             max-width: 100%;
+            background-color: #ffffff; /* Add white background to the body */
         }
         .container {
             width: 100%;
-            max-width: 450px; /* Max width of the entire container to avoid stretching */
+            max-width: 450px;
             padding: 15px;
             margin: 0 auto;
             box-sizing: border-box;
+            background-color: #ffffff; /* Add white background to the container */
+            border-radius: 8px; /* Optional: add rounded corners for a clean look */
         }
         input, button {
-            width: 90%; /* Set width of inputs and buttons to 90% to match the container */
+            width: 90%;
             max-width: 90%;
             margin: 10px auto;
             padding: 10px;
@@ -39,25 +42,25 @@
         h2 {
             font-size: 22px;
             color: #323C8F;
-            text-align: center; /* Center align the heading */
+            text-align: center;
         }
         #impactResult {
             margin-top: 15px;
             font-size: 13px;
             font-weight: bold;
             color: #282D27;
-            text-align: center; /* Center align the result text */
+            text-align: center;
         }
         canvas {
-            width: 240px !important; /* Medium-sized pie chart */
+            width: 240px !important;
             height: 240px !important;
             max-width: 100% !important;
-            margin: 20px auto; /* Center the pie chart */
+            margin: 20px auto;
             display: block;
         }
         .preset-buttons {
             margin-bottom: 15px;
-            text-align: center; /* Center align the preset buttons */
+            text-align: center;
         }
         .preset-buttons button {
             width: 28%;
@@ -70,7 +73,7 @@
             border-radius: 8px;
             font-size: 13px;
             color: #282D27;
-            text-align: center; /* Center align the explanation text */
+            text-align: center;
         }
         .explanation h4 {
             color: #DE5428;
@@ -113,24 +116,18 @@
         <h2>Impact Calculator</h2>
         <p>Choose a pre-set donation amount or enter a custom amount to see its impact:</p>
 
-        <!-- Pre-set buttons -->
         <div class="preset-buttons">
             <button onclick="setDonation(25)">Donate $25</button>
             <button onclick="setDonation(50)">Donate $50</button>
             <button onclick="setDonation(100)">Donate $100</button>
         </div>
 
-        <!-- Input box with corrected width -->
         <input type="number" id="donationAmount" placeholder="Enter amount in $" />
-
-        <!-- Calculate button -->
         <button onclick="calculateImpact()">Calculate Impact</button>
 
-        <!-- Results -->
         <h3>Results:</h3>
         <p id="impactResult"></p>
 
-        <!-- Medium-sized pie chart container -->
         <canvas id="pieChart"></canvas>
 
         <div class="explanation">
@@ -145,13 +142,11 @@
     <script>
         let pieChartInstance = null;
 
-        // Pre-set donation amount button function
         function setDonation(amount) {
             document.getElementById('donationAmount').value = amount;
             calculateImpact();
         }
 
-        // Calculate impact based on input value
         function calculateImpact() {
             const amount = document.getElementById('donationAmount').value;
 
