@@ -15,7 +15,7 @@
         }
         .container {
             width: 100%;
-            max-width: 400px; /* Max width for desktop */
+            max-width: 400px;
             margin: 0 auto;
             text-align: center;
             background-color: white;
@@ -30,7 +30,7 @@
         input {
             margin: 10px;
             padding: 10px;
-            width: 90%; /* Adjusted to fit better */
+            width: 90%;
             border: 2px solid #E89619;
             border-radius: 5px;
         }
@@ -41,21 +41,21 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 90%; /* Adjusted for better fit */
+            width: 90%;
         }
         button:hover {
             background-color: #E89619;
         }
         #impactResult {
             margin-top: 20px;
-            font-size: 16px; /* Adjusted for readability */
+            font-size: 16px;
             font-weight: bold;
             color: #282D27;
         }
         canvas {
             margin-top: 20px;
-            max-width: 100%; /* Scales the pie chart to fit */
-            height: auto; /* Adjusts the height to maintain aspect ratio */
+            max-width: 100%;
+            height: auto;
         }
         .explanation {
             margin-top: 30px;
@@ -77,14 +77,14 @@
         /* Responsive Design for Tablets */
         @media (max-width: 768px) {
             .container {
-                max-width: 90%; /* Shrinks the container to fit tablets */
+                max-width: 90%;
                 padding: 15px;
             }
             h2 {
                 font-size: 22px;
             }
             input, button {
-                width: 100%; /* Ensure input and buttons fit on smaller screens */
+                width: 100%;
             }
             #impactResult {
                 font-size: 15px;
@@ -94,14 +94,14 @@
         /* Responsive Design for Mobile */
         @media (max-width: 480px) {
             .container {
-                max-width: 100%; /* Full width for mobile */
+                max-width: 100%;
                 padding: 10px;
             }
             h2 {
                 font-size: 20px;
             }
             input, button {
-                width: 100%; /* Full width input and buttons */
+                width: 100%;
             }
             #impactResult {
                 font-size: 14px;
@@ -130,6 +130,8 @@
     </div>
 
     <script>
+        let pieChartInstance = null;  // Declaring a global variable for the chart
+
         function calculateImpact() {
             const amount = document.getElementById('donationAmount').value;
 
@@ -148,7 +150,14 @@
                     <br> - $${programs.toFixed(2)} for Programs.`;
 
                 const ctx = document.getElementById('pieChart').getContext('2d');
-                new Chart(ctx, {
+
+                // Destroy the existing chart instance if it exists to prevent overlapping charts
+                if (pieChartInstance) {
+                    pieChartInstance.destroy();
+                }
+
+                // Create a new chart
+                pieChartInstance = new Chart(ctx, {
                     type: 'pie',
                     data: {
                         labels: ['Fundraising (8%)', 'Management (3%)', 'Programs (89%)'],
@@ -159,7 +168,7 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,  /* Ensures the chart scales properly */
+                        maintainAspectRatio: true, // Ensure chart fits well across all platforms
                         plugins: {
                             legend: {
                                 position: 'bottom'
